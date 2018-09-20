@@ -1,0 +1,14 @@
+{{ define "main" }}
+
+<main class="container">
+  <img src="logo.svg" alt="Shuppet Laboratories Logo" />
+
+  {{ block "menu" . }}{{ partial "menu" . }}{{end}}
+  
+  <div class="bubbles">
+  </div>
+
+  {{ block "social" . }}{{ partial "social" . }}{{end}}
+</main>
+
+{{end}}
