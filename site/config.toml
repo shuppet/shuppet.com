@@ -13,11 +13,25 @@ title = "Shuppet Laboratories"
     weight = -110
 
   [[menu.main]]
+    identifier = "projects"
+    name = "Projects"
+    title = "Projects | Shuppet Laboratories"
+    url = "/projects/"
+    weight = -100
+
+  [[menu.main]]
+    identifier = "services"
+    name = "Services"
+    title = "Services | Shuppet Laboratories"
+    url = "/services/"
+    weight = -90
+
+  [[menu.main]]
     identifier = "contact"
     name = "Contact"
-    title = "Shuppet Laboratories Contact"
+    title = "Contact | Shuppet Laboratories"
     url = "/contact/"
-    weight = -100
+    weight = -80
 
 # RSS, categories and tags disabled for an easy start
 # See configuration options for more details: 
