@@ -1,4 +1,8 @@
-FROM nginx:mainline-alpine
+FROM node:8.12.0-alpine
 LABEL maintainer="Kane Valentine <kane.valentine@shuppet.com>"
 
-CMD ["nginx"]
+WORKDIR /opt/shuppet.com/
+ADD ${PWD} ${PWD}
+
+RUN npm install
+CMD ["npm", "start"]

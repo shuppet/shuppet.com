@@ -18,6 +18,7 @@ export default {
     ]
   },
 
+  mode: 'production',
   plugins: [
     new webpack.ProvidePlugin({
       "fetch": "imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch"
