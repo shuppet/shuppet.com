@@ -2,6 +2,7 @@ baseurl = "/"
 languageCode = "en-us"
 languageLang = "en"
 title = "Shuppet Laboratories"
+disableHugoGeneratorInject = true
 
 [menu]
 
