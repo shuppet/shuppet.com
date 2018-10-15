@@ -1,0 +1,20 @@
+<nav class="main-nav show-for-large">
+    {{ $currentPage := . }}
+    {{ range .Site.Menus.main }}
+    <a class="main-nav-item{{if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active{{end}}" href="{{ .URL }}" title="{{ .Title }}">{{ .Name }}</a>
+    {{ end }}
+</nav>
+
+<nav class="main-nav hide-for-large">
+    <span class="menu-trigger">
+        <i class="fas fa-bars"></i>
+    </span>
+
+    <div class="main-nav__dropdown">
+        {{ $currentPage := . }}
+        {{ range .Site.Menus.main }}
+            <a class="main-nav-item{{if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active{{end}}" href="{{ .URL }}" title="{{ .Title }}">{{ .Name }}</a>
+        {{ end }}
+    </div>
+    
+</nav>
