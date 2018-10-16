@@ -59,7 +59,19 @@ var Bubbles = function(options) {
 };
 
 !(function() {
-  var Shuppet = new Bubbles();
+  if (document.querySelector(".bubbles")) {
+    var Shuppet = new Bubbles();
 
-  Shuppet.init();
+    Shuppet.init();
+  }
+
+  document.querySelector(".menu-trigger").addEventListener("click", function() {
+    var menu = document.querySelector(".main-nav.hide-for-large");
+
+    if (menu.classList.contains("open-menu")) {
+      menu.classList.remove("open-menu");
+    } else {
+      menu.classList.add("open-menu");
+    }
+  });
 })();

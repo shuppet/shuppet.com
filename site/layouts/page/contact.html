@@ -1,15 +1,9 @@
 {{ define "main" }}
 
-<main class="container">
-  <div class="content">{{ .Content }}</div>
-  <img src="logo.svg" alt="Shuppet Laboratories Logo" />
-
-  {{ block "menu" . }}{{ partial "menu" . }}{{end}}
-  
-  <div class="bubbles">
-  </div>
-
-  {{ block "social" . }}{{ partial "social" . }}{{end}}
+<main class="inner-container">
+    <div class="grid-container">
+        <div class="content markdown-body">{{ .Content }}</div>
+    </div>
 </main>
 
 {{end}}
