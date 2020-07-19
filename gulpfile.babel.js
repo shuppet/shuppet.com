@@ -17,18 +17,6 @@ const browserSync = BrowserSync.create();
 const hugoArgsDefault = ["-d", "../dist", "-s", "site", "-v"];
 const hugoArgsPreview = ["--buildDrafts", "--buildFuture"];
 
-// Development tasks
-gulp.task("hugo", (cb) => buildSite(cb));
-gulp.task("hugo-preview", (cb) => buildSite(cb, hugoArgsPreview));
-
-// Run server tasks
-gulp.task("server", ["hugo", "css", "js", "fonts"], (cb) => runServer(cb));
-gulp.task("server-preview", ["hugo-preview", "css", "js", "fonts"], (cb) => runServer(cb));
-
-// Build/production tasks
-gulp.task("build", ["css", "js", "fonts"], (cb) => buildSite(cb, [], "production"));
-gulp.task("build-preview", ["css", "js", "fonts"], (cb) => buildSite(cb, hugoArgsPreview, "production"));
-
 // Compile CSS with PostCSS
 gulp.task("css", () => (
   gulp.src("./src/css/*.css")
@@ -53,7 +41,7 @@ gulp.task("js", (cb) => {
 });
 
 // Move all fonts in a flattened directory
-gulp.task('fonts', () => (
+gulp.task("fonts", () => (
   gulp.src("./src/fonts/**/*")
     .pipe(flatten())
     .pipe(gulp.dest("./dist/fonts"))
@@ -67,11 +55,11 @@ function runServer() {
       baseDir: "./dist"
     }
   });
-  gulp.watch("./src/js/**/*.js", ["js"]);
-  gulp.watch("./src/css/**/*.css", ["css"]);
-  gulp.watch("./src/fonts/**/*", ["fonts"]);
-  gulp.watch("./site/**/*", ["hugo"]);
-};
+  gulp.watch("./src/js/**/*.js", gulp.parallel("js"));
+  gulp.watch("./src/css/**/*.css", gulp.parallel("css"));
+  gulp.watch("./src/fonts/**/*", gulp.parallel("fonts"));
+  gulp.watch("./site/**/*", gulp.parallel("hugo"));
+}
 
 /**
  * Run hugo and build the site
@@ -91,3 +79,15 @@ function buildSite(cb, options, environment = "development") {
     }
   });
 }
+
+// Development tasks
+gulp.task("hugo", (cb) => buildSite(cb));
+gulp.task("hugo-preview", (cb) => buildSite(cb, hugoArgsPreview));
+
+// Run server tasks
+gulp.task("server", gulp.series("hugo", "css", "js", "fonts", (cb) => runServer(cb)));
+gulp.task("server-preview", gulp.series("hugo-preview", "css", "js", "fonts", (cb) => runServer(cb)));
+
+// Build/production tasks
+gulp.task("build", gulp.series(["css", "js", "fonts"], (cb) => buildSite(cb, [], "production")));
+gulp.task("build-preview", gulp.series(["css", "js", "fonts"], (cb) => buildSite(cb, hugoArgsPreview, "production")));
